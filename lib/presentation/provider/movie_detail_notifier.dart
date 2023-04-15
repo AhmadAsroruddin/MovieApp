@@ -1,4 +1,5 @@
-import 'package:ditonton/domain/entities/series.dart';
+import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/entities/series_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
@@ -16,8 +17,8 @@ class MovieDetailNotifier extends ChangeNotifier {
   final GetMovieDetail getMovieDetail;
   final GetMovieRecommendations getMovieRecommendations;
   final GetWatchListStatus getWatchListStatus;
-  final SaveWatchlist saveWatchlist;
-  final RemoveWatchlist removeWatchlist;
+  final SaveMoviesWatchlist saveWatchlist;
+  final RemoveMoviesWatchlist removeWatchlist;
 
   MovieDetailNotifier({
     required this.getMovieDetail,
@@ -27,14 +28,14 @@ class MovieDetailNotifier extends ChangeNotifier {
     required this.removeWatchlist,
   });
 
-  late SeriesDetail _movie;
-  SeriesDetail get movie => _movie;
+  late MovieDetail _movie;
+  MovieDetail get movie => _movie;
 
   RequestState _movieState = RequestState.Empty;
   RequestState get movieState => _movieState;
 
-  List<Series> _movieRecommendations = [];
-  List<Series> get movieRecommendations => _movieRecommendations;
+  List<Movie> _movieRecommendations = [];
+  List<Movie> get movieRecommendations => _movieRecommendations;
 
   RequestState _recommendationState = RequestState.Empty;
   RequestState get recommendationState => _recommendationState;
@@ -79,7 +80,7 @@ class MovieDetailNotifier extends ChangeNotifier {
   String _watchlistMessage = '';
   String get watchlistMessage => _watchlistMessage;
 
-  Future<void> addWatchlist(SeriesDetail movie) async {
+  Future<void> addWatchlist(MovieDetail movie) async {
     final result = await saveWatchlist.execute(movie);
 
     await result.fold(
@@ -94,7 +95,7 @@ class MovieDetailNotifier extends ChangeNotifier {
     await loadWatchlistStatus(movie.id);
   }
 
-  Future<void> removeFromWatchlist(SeriesDetail movie) async {
+  Future<void> removeFromWatchlist(MovieDetail movie) async {
     final result = await removeWatchlist.execute(movie);
 
     await result.fold(

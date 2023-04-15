@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/genre.dart';
-import 'package:ditonton/domain/entities/series.dart';
-import 'package:ditonton/domain/entities/series_detail.dart';
+import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
 class MovieDetailPage extends StatefulWidget {
-  static const ROUTE_NAME = '/detail';
+  static const ROUTE_NAME = '/detail-movie';
 
   final int id;
   MovieDetailPage({required this.id});
@@ -22,6 +22,7 @@ class MovieDetailPage extends StatefulWidget {
 class _MovieDetailPageState extends State<MovieDetailPage> {
   @override
   void initState() {
+    print('asdasdasd${widget.id}');
     super.initState();
     Future.microtask(() {
       Provider.of<MovieDetailNotifier>(context, listen: false)
@@ -59,8 +60,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 }
 
 class DetailContent extends StatelessWidget {
-  final SeriesDetail movie;
-  final List<Series> recommendations;
+  final MovieDetail movie;
+  final List<Movie> recommendations;
   final bool isAddedWatchlist;
 
   DetailContent(this.movie, this.recommendations, this.isAddedWatchlist);
@@ -102,7 +103,7 @@ class DetailContent extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              movie.name,
+                              movie.title,
                               style: kHeading5,
                             ),
                             ElevatedButton(
@@ -155,7 +156,9 @@ class DetailContent extends StatelessWidget {
                             Text(
                               _showGenres(movie.genres),
                             ),
-                          
+                            Text(
+                              _showDuration(movie.runtime),
+                            ),
                             Row(
                               children: [
                                 RatingBarIndicator(

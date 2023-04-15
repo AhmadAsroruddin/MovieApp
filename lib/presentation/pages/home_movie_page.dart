@@ -1,18 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/domain/entities/series.dart';
+import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:ditonton/presentation/pages/home_series_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
+import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'watchlist_sereis_page.dart';
+
 class HomeMoviePage extends StatefulWidget {
+  static const ROUTE_NAME = '\movie-page';
   @override
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }
@@ -49,10 +53,17 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               },
             ),
             ListTile(
+              leading: Icon(Icons.movie),
+              title: Text('Series'),
+              onTap: () {
+                Navigator.pushNamed(context, HomeSeriesPage.ROUTE_NAME);
+              },
+            ),
+            ListTile(
               leading: Icon(Icons.save_alt),
               title: Text('Watchlist'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WatchlistSeriesPage.ROUTE_NAME);
               },
             ),
             ListTile(
@@ -66,7 +77,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         ),
       ),
       appBar: AppBar(
-        title: Text('Ditonton'),
+        title: Text('Movies'),
         actions: [
           IconButton(
             onPressed: () {
@@ -104,6 +115,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
+            
                 final state = data.popularMoviesState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -162,7 +174,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
 }
 
 class MovieList extends StatelessWidget {
-  final List<Series> movies;
+  final List<Movie> movies;
 
   MovieList(this.movies);
 
@@ -178,6 +190,7 @@ class MovieList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
+                print(movie.id);
                 Navigator.pushNamed(
                   context,
                   MovieDetailPage.ROUTE_NAME,

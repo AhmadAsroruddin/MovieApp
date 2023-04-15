@@ -1,5 +1,5 @@
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/series.dart';
+import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
 import 'package:flutter/foundation.dart';
 
@@ -11,8 +11,8 @@ class MovieSearchNotifier extends ChangeNotifier {
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
 
-  List<Series> _searchResult = [];
-  List<Series> get searchResult => _searchResult;
+  List<Movie> _searchResult = [];
+  List<Movie> get searchResult => _searchResult;
 
   String _message = '';
   String get message => _message;

@@ -13,12 +13,14 @@ class SeriesTable extends Equatable {
   final String? title;
   final String? posterPath;
   final String? overview;
+  final String? jenis;
 
   SeriesTable({
     required this.id,
     required this.title,
     required this.posterPath,
     required this.overview,
+    this.jenis = "series"
   });
 
   factory SeriesTable.fromEntity(SeriesDetail movie) => SeriesTable(
