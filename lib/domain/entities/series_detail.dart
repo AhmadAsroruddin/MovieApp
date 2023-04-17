@@ -4,8 +4,9 @@
 
 import 'dart:convert';
 import 'genre.dart';
+import 'package:equatable/equatable.dart';
 
-class SeriesDetail {
+class SeriesDetail extends Equatable {
   SeriesDetail({
     required this.backdropPath,
     required this.firstAirDate,
@@ -30,10 +31,11 @@ class SeriesDetail {
     required this.type,
     required this.voteAverage,
     required this.voteCount,
+    this.jenis = "series"
   });
 
   String backdropPath;
-
+  String jenis;
   DateTime firstAirDate;
   List<Genre> genres;
   String homepage;

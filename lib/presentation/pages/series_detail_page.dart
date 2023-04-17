@@ -22,6 +22,7 @@ class SeriesDetailPage extends StatefulWidget {
 class _SeriesDetailPageState extends State<SeriesDetailPage> {
   @override
   void initState() {
+    print(widget.id);
     super.initState();
     Future.microtask(() {
       Provider.of<SeriesDetailNotifier>(context, listen: false)
@@ -155,7 +156,6 @@ class DetailContent extends StatelessWidget {
                             Text(
                               _showGenres(series.genres),
                             ),
-                          
                             Row(
                               children: [
                                 RatingBarIndicator(

@@ -15,7 +15,8 @@ class SeriesModel extends Equatable {
       required this.voteCount,
       required this.name,
       required this.originalLanguage,
-      required this.originalName});
+      required this.originalName,
+      this.jenis = "series"});
 
   String? posterPath;
   String? backdropPath;
@@ -29,11 +30,13 @@ class SeriesModel extends Equatable {
   double? voteAverage;
   int? voteCount;
   List<int>? genreIds;
+  String jenis;
 
   factory SeriesModel.fromJson(Map<String, dynamic> json) => SeriesModel(
         backdropPath: json['backdrop_path'] as String?,
-        genreIds:
-            (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
+        genreIds: (json['genre_ids'] as List<dynamic>?)
+            ?.map((e) => e as int)
+            .toList(),
         id: json['id'] as int,
         firstAirDate: json['first_air_date'] as String?,
         overview: json['overview'] as String?,
@@ -46,7 +49,7 @@ class SeriesModel extends Equatable {
         originalName: json['original_name'] as String?,
       );
 
-  Map<String, dynamic> toJson() =>  <String, dynamic>{
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'posterPath': this.posterPath,
         'backdropPath': this.backdropPath,
         'overview': this.overview,
@@ -75,6 +78,7 @@ class SeriesModel extends Equatable {
       posterPath: this.posterPath,
       voteAverage: this.voteAverage,
       voteCount: this.voteCount,
+      jenis: this.jenis
     );
   }
 

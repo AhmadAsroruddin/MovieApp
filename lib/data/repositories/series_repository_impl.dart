@@ -26,8 +26,7 @@ class SeriesRepositoryImpl implements SeriesRepository {
     if (await networkInfo.isConnected) {
       try {
         final result = await remoteDataSource.getNowPlayingMovies();
-       
-       
+
         return Right(result.map((model) => model.toEntity()).toList());
       } on ServerException {
         return Left(ServerFailure(''));
@@ -139,6 +138,8 @@ class SeriesRepositoryImpl implements SeriesRepository {
   @override
   Future<Either<Failure, List<Series>>> getWatchlistSeries() async {
     final result = await localDataSource.getWatchlistSeriess();
+    print(
+        "ini dari series repo ${result.map((data) => data.toEntity()).toList()}");
     return Right(result.map((data) => data.toEntity()).toList());
   }
 }

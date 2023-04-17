@@ -47,7 +47,8 @@ void main() {
       originalLanguage: "en",
       voteCount: 9,
       name: "Victoria",
-      originalName: "Victoria"
+      originalName: "Victoria",
+      jenis: "series"
   );
   final tMovieList = <Series>[tMovie];
 

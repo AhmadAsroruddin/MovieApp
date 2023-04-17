@@ -52,11 +52,11 @@ class _WatchlistMoviesPageState extends State<WatchlistSeriesPage>
             } else if (data.watchlistState == RequestState.Loaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = data.watchlistMovies[index];
-                  print('sdasd ${movie.props}');
+                  final movie = data.watchlistSeries[index];
+                 
                   return SeriesCard(movie);
                 },
-                itemCount: data.watchlistMovies.length,
+                itemCount: data.watchlistSeries.length,
               );
             } else {
               return Center(

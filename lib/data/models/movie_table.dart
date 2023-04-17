@@ -9,7 +9,6 @@ class MovieTable extends Equatable {
   final String? posterPath;
   final String? overview;
   final String? jenis;
-
   MovieTable({
     required this.id,
     required this.title,
@@ -44,6 +43,7 @@ class MovieTable extends Equatable {
         'title': title,
         'posterPath': posterPath,
         'overview': overview,
+        
       };
 
   Movie toEntity() => Movie.watchlist(

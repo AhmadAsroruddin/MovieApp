@@ -31,6 +31,7 @@ void main() {
     posterPath: 'posterPath',
     voteAverage: 1,
     voteCount: 1,
+    jenis: "series"
   );
 
   test('should be a subclass of Movie entity', () async {

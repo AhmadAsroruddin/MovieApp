@@ -20,7 +20,7 @@ void main() {
     listenerCallCount = 0;
     mockGetWatchlistSeries = MockGetWatchlistSeries();
     provider = WatchlistSeriesNotifier(
-      getWatchlistMovies: mockGetWatchlistSeries,
+      getWatchlistSeries: mockGetWatchlistSeries,
     )..addListener(() {
         listenerCallCount += 1;
       });
@@ -34,7 +34,7 @@ void main() {
     await provider.fetchWatchlistSeries();
     // assert
     expect(provider.watchlistState, RequestState.Loaded);
-    expect(provider.watchlistMovies, [testWatchlistSeries]);
+    expect(provider.watchlistSeries, [testWatchlistSeries]);
     expect(listenerCallCount, 2);
   });
 

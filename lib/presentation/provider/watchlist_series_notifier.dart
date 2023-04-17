@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 class WatchlistSeriesNotifier extends ChangeNotifier {
   var _watchlistSeries = <Series>[];
-  List<Series> get watchlistMovies => _watchlistSeries;
+  List<Series> get watchlistSeries => _watchlistSeries;
 
   var _watchlistState = RequestState.Empty;
   RequestState get watchlistState => _watchlistState;
@@ -13,15 +13,15 @@ class WatchlistSeriesNotifier extends ChangeNotifier {
   String _message = '';
   String get message => _message;
 
-  WatchlistSeriesNotifier({required this.getWatchlistMovies});
+  WatchlistSeriesNotifier({required this.getWatchlistSeries});
 
-  final GetWatchlistSeries getWatchlistMovies;
+  final GetWatchlistSeries getWatchlistSeries;
 
   Future<void> fetchWatchlistSeries() async {
     _watchlistState = RequestState.Loading;
     notifyListeners();
 
-    final result = await getWatchlistMovies.execute();
+    final result = await getWatchlistSeries.execute();
     result.fold(
       (failure) {
         _watchlistState = RequestState.Error;

@@ -22,7 +22,7 @@ class MovieDetailPage extends StatefulWidget {
 class _MovieDetailPageState extends State<MovieDetailPage> {
   @override
   void initState() {
-    print('asdasdasd${widget.id}');
+    
     super.initState();
     Future.microtask(() {
       Provider.of<MovieDetailNotifier>(context, listen: false)

@@ -13,13 +13,15 @@ class Series extends Equatable {
       required this.voteCount,
       required this.name,
       required this.originalLanguage,
-      required this.originalName});
+      required this.originalName,
+      required this.jenis});
 
   Series.watchlist({
     required this.id,
     required this.overview,
     required this.posterPath,
     required this.name,
+    required this.jenis,
   });
 
   String? posterPath;
@@ -34,6 +36,7 @@ class Series extends Equatable {
   double? voteAverage;
   int? voteCount;
   List<int>? genreIds;
+  String jenis;
 
   @override
   List<Object?> get props => [

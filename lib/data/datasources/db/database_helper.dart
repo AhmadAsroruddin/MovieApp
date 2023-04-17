@@ -29,8 +29,13 @@ class DatabaseHelper {
     final path = await getDatabasesPath();
     final databasePath = '$path/ditonton.db';
 
-    var db = await openDatabase(databasePath, version: 1, onCreate: _onCreate);
+    var db = await openDatabase(databasePath,
+        version: 2, onCreate: _onCreate, onUpgrade: _onUpgrade);
     return db;
+  }
+
+  void _onUpgrade(Database db, int oldVersion, int newVersion) {
+    db.execute("ALTER TABLE $_tblWatchlist ADD COLUMN jenis TEXT");
   }
 
   void _onCreate(Database db, int version) async {
@@ -185,7 +190,7 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> getWatchlistMovies() async {
     final db = await database;
     final List<Map<String, dynamic>> results = await db!.query(_tblWatchlist);
-
+    print(results);
     return results;
   }
 }

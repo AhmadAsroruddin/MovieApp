@@ -60,7 +60,8 @@ void main() {
       originalLanguage: "en",
       voteCount: 9,
       name: "Victoria",
-      originalName: "Victoria");
+      originalName: "Victoria",
+      jenis: "series");
   final testMovieCache = SeriesTable(
     id: 557,
     overview:

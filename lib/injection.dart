@@ -81,7 +81,7 @@ void init() {
   );
   locator.registerFactory(
     () => WatchlistSeriesNotifier(
-      getWatchlistMovies: locator(),
+      getWatchlistSeries: locator(),
     ),
   );
 
@@ -135,7 +135,7 @@ void init() {
   locator.registerLazySingleton(() => RemoveWatchlist(locator()));
   locator.registerLazySingleton(() => GetWatchlistSeries(locator()));
   locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
-  
+
   //movies
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
   locator.registerLazySingleton(() => GetPopularMovies(locator()));

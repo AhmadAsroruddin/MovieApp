@@ -15,44 +15,45 @@ class SeriesTable extends Equatable {
   final String? overview;
   final String? jenis;
 
-  SeriesTable({
-    required this.id,
-    required this.title,
-    required this.posterPath,
-    required this.overview,
-    this.jenis = "series"
-  });
+  SeriesTable(
+      {required this.id,
+      required this.title,
+      required this.posterPath,
+      required this.overview,
+      this.jenis = "series"});
 
   factory SeriesTable.fromEntity(SeriesDetail movie) => SeriesTable(
         id: movie.id,
         title: movie.name,
         posterPath: movie.posterPath,
         overview: movie.overview,
+        jenis: movie.jenis
       );
 
   factory SeriesTable.fromMap(Map<String, dynamic> map) => SeriesTable(
-        id: map['id'],
-        title: map['title'],
-        posterPath: map['posterPath'],
-        overview: map['overview'],
-      );
+      id: map['id'],
+      title: map['title'],
+      posterPath: map['posterPath'],
+      overview: map['overview'],
+      jenis: map['jenis']);
 
   Map<String, dynamic> toJson() => _$SeriesTableToJson(this);
 
   Series toEntity() => Series.watchlist(
-        id: id,
-        overview: overview,
-        posterPath: posterPath,
-        name: title,
-      );
+      id: id,
+      overview: overview,
+      posterPath: posterPath,
+      name: title,
+      jenis: jenis??"movie");
   factory SeriesTable.fromDTO(SeriesModel movie) => SeriesTable(
         id: movie.id,
         title: movie.name,
         posterPath: movie.posterPath,
         overview: movie.overview,
+        jenis: movie.jenis
       );
 
   @override
   // TODO: implement props
-  List<Object?> get props => [id, title, posterPath, overview];
+  List<Object?> get props => [id, title, posterPath, overview, jenis];
 }

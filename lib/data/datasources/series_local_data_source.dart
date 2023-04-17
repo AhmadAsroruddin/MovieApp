@@ -49,25 +49,24 @@ class SeriesLocalDataSourceImpl implements SeriesLocalDataSource {
   @override
   Future<List<SeriesTable>> getWatchlistSeriess() async {
     final result = await databaseHelper.getWatchlistSeries();
+    print("ini dari local ${result.map((data) => SeriesTable.fromMap(data)).toList()};");
     return result.map((data) => SeriesTable.fromMap(data)).toList();
   }
-  
+
   @override
-  Future<void> cacheNowPlayingSeries(List<SeriesTable> Seriess) async{
+  Future<void> cacheNowPlayingSeries(List<SeriesTable> Seriess) async {
     await databaseHelper.insertCacheTransaction(Seriess, 'now playing');
     await databaseHelper.clearCache('now playing');
     await databaseHelper.insertCacheTransaction(Seriess, 'now playing');
   }
-  
+
   @override
-  Future<List<SeriesTable>> getCachedNowPlayingSeriess() async{
+  Future<List<SeriesTable>> getCachedNowPlayingSeriess() async {
     final result = await databaseHelper.getCacheSeries('now playing');
-     if (result.length > 0) {
+    if (result.length > 0) {
       return result.map((data) => SeriesTable.fromMap(data)).toList();
     } else {
       throw CacheException("Can't get the data :(");
     }
   }
-  
-  
 }
