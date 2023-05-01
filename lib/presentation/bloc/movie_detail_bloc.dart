@@ -26,7 +26,6 @@ class MovieDetailCubit extends Cubit<MovieDetailState> {
 
   Future<void> fetchMovieDetail(int id) async {
     emit(MovieDetailLoading());
-    ;
 
     final detailResult = await getMovieDetail.execute(id);
     final recommendationResult = await getMovieRecommendations.execute(id);

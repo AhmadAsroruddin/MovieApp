@@ -1,6 +1,10 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation/bloc/movie_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_list_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_topRatedMovies_bloc.dart';
+import 'package:ditonton/presentation/bloc/movies_watchList_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/now_playing_series_page.dart';
@@ -85,7 +89,21 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<SearchCubit>(),
         ),
-        BlocProvider(create: (_) => di.locator<MovieDetailCubit>())
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieListCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieTopRatedCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MoviesPopularCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MoviesWatchListCubit>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

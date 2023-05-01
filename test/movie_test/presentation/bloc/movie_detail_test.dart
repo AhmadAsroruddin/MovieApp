@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
@@ -92,6 +93,26 @@ void main() {
       MovieDetailLoading(),
       MovieDetailHasData(testMovieDetail, tMovies, true),
     ],
+    verify: (bloc) {
+      verify(mockGetMovieDetail.execute(tId));
+    },
+  );
+  blocTest<MovieDetailCubit, MovieDetailState>(
+    "Should emit erroe when no data getted ",
+    build: () {
+      when(mockGetMovieDetail.execute(tId))
+          .thenAnswer((_) async => Left(
+            ServerFailure('Server Failure'),
+          ));
+      when(mockGetMovieRecommendations.execute(tId))
+          .thenAnswer((_) async => Left(
+                ServerFailure('Server Failure'),
+              ));
+      when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
+      return movieDetailCubit;
+    },
+    act: (bloc) => bloc.fetchMovieDetail(tId),
+    expect: () => [MovieDetailLoading(), MovieDetailError('Server Failure')],
     verify: (bloc) {
       verify(mockGetMovieDetail.execute(tId));
     },

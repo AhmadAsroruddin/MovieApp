@@ -1,8 +1,11 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/series.dart';
+import 'package:ditonton/presentation/bloc/movie_list_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_list_state.dart';
 import 'package:ditonton/presentation/provider/top_rated_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/series_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/movie_list_notifier.dart';
@@ -21,9 +24,10 @@ class _NowPlayingMoviePageState extends State<NowPlayingMoviePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<MovieListNotifier>(context, listen: false)
-            .fetchNowPlayingMovies());
+    print("fired!!!");
+    Future.microtask(() {
+      context.read<MovieListCubit>().fetchNowPlayingMovies();
+    });
   }
 
   @override
@@ -34,17 +38,17 @@ class _NowPlayingMoviePageState extends State<NowPlayingMoviePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<MovieListNotifier>(builder: (context, data, child) {
-          final state = data.nowPlayingState;
-          if (state == RequestState.Loading) {
+        child: BlocBuilder<MovieListCubit, MovieListState>(
+            builder: (context, state) {
+          if (state is MovieListLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state == RequestState.Loaded) {
+          } else if (state is MovieListHasDataNowPlaying) {
             return ListView.builder(
-              itemCount: data.nowPlayingMovies.length,
+              itemCount: state.result.length,
               itemBuilder: (context, index) {
-                final series = data.nowPlayingMovies[index];
+                final series = state.result[index];
                 return MovieCard(series);
               },
             );

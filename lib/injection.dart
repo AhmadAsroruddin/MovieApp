@@ -26,6 +26,9 @@ import 'package:ditonton/domain/usecases/saveSeries_watchlist.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
 import 'package:ditonton/domain/usecases/search_series.dart';
 import 'package:ditonton/presentation/bloc/movie_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_list_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/movies_watchList_bloc.dart';
 import 'package:ditonton/presentation/provider/series_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/series_list_notifier.dart';
 import 'package:ditonton/presentation/provider/series_search_notifier.dart';
@@ -38,6 +41,7 @@ import 'package:get_it/get_it.dart';
 import 'data/datasources/movie_local_data_source.dart';
 import 'domain/usecases/remove_watchlist.dart';
 import 'domain/usecases/save_watchlist.dart';
+import 'presentation/bloc/movie_topRatedMovies_bloc.dart';
 import 'presentation/bloc/search_bloc.dart';
 import 'presentation/provider/movie_detail_notifier.dart';
 import 'presentation/provider/movie_list_notifier.dart';
@@ -100,6 +104,11 @@ void init() {
       locator(),
     ),
   );
+
+  locator.registerFactory(() => MovieListCubit(locator()));
+  locator.registerFactory(() => MovieTopRatedCubit(locator()));
+  locator.registerFactory(() => MoviesPopularCubit(locator()));
+  locator.registerFactory(() => MoviesWatchListCubit(locator()));
 
   ///sadasdasd
   locator.registerFactory(
