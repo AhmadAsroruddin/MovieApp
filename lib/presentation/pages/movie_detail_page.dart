@@ -5,7 +5,6 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/presentation/bloc/movies/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/movies/movie_detail_state.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,9 +37,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       body: BlocBuilder<MovieDetailCubit, MovieDetailState>(
         builder: (context, state) {
           if (state is MovieDetailLoading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Icon(Icons.add);
           } else if (state is MovieDetailHasData) {
             final movie = state.result;
             return SafeArea(
@@ -52,9 +49,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             );
           } else if (state is MovieDetailError) {
             return Text(state.message);
-          } else {
-            return Container();
           }
+          return Icon(Icons.add);
         },
       ),
     );

@@ -4,7 +4,6 @@ import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/series.dart';
 import 'package:ditonton/domain/entities/series_detail.dart';
 import 'package:ditonton/presentation/bloc/series/series_detail_state.dart';
-import 'package:ditonton/presentation/provider/series_detail_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

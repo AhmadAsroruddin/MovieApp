@@ -2,14 +2,11 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/series.dart';
 import 'package:ditonton/presentation/bloc/movies/movie_list_bloc.dart';
 import 'package:ditonton/presentation/bloc/movies/movie_list_state.dart';
-import 'package:ditonton/presentation/provider/top_rated_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/series_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/movie_list_notifier.dart';
-import '../provider/series_list_notifier.dart';
 import '../widgets/movie_card_list.dart';
 import 'home_series_page.dart';
 

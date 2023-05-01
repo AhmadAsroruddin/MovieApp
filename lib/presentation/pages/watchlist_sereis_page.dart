@@ -1,11 +1,8 @@
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation/bloc/series/series_watchList_bloc.dart';
-import 'package:ditonton/presentation/provider/watchlist_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/series_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 import '../bloc/series/series_watchList_state.dart';
 import '../widgets/movie_card_list.dart';

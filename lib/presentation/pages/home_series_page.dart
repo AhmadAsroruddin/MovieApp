@@ -9,7 +9,6 @@ import 'package:ditonton/presentation/pages/popular_series_page.dart';
 import 'package:ditonton/presentation/pages/series_search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_series_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_sereis_page.dart';
-import 'package:ditonton/presentation/provider/series_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

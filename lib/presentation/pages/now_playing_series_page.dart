@@ -1,11 +1,13 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/series.dart';
-import 'package:ditonton/presentation/provider/top_rated_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/series_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/series_list_notifier.dart';
+import '../bloc/movies/movie_list_bloc.dart';
+import '../bloc/series/series_list_bloc.dart';
+import '../bloc/series/series_list_state.dart';
 import 'home_series_page.dart';
 
 class NowPlayingSeriesPage extends StatefulWidget {
@@ -20,8 +22,7 @@ class _NowPlayingSeriesPageState extends State<NowPlayingSeriesPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<SeriesListNotifier>(context, listen: false)
-            .fetchNowPlayingSeries());
+        context.read<SeriesListCubit>().fetchNowPlayingSeries());
   }
 
   @override
@@ -32,17 +33,17 @@ class _NowPlayingSeriesPageState extends State<NowPlayingSeriesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<SeriesListNotifier>(builder: (context, data, child) {
-          final state = data.nowPlayingState;
-          if (state == RequestState.Loading) {
+        child: BlocBuilder<SeriesListCubit, SeriesListState>(
+            builder: (context, state) {
+          if (state is SeriesListLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state == RequestState.Loaded) {
+          } else if (state is SeriesListHasData) {
             return ListView.builder(
-              itemCount: data.nowPlayingSeries.length,
+              itemCount: state.result.length,
               itemBuilder: (context, index) {
-                final series = data.nowPlayingSeries[index];
+                final series = state.result[index];
                 return SeriesCard(series);
               },
             );
