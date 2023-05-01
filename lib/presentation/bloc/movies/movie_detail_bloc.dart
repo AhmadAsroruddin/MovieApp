@@ -1,13 +1,14 @@
-import 'package:ditonton/presentation/bloc/movie_detail_state.dart';
-import 'package:ditonton/presentation/bloc/search_bloc.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_detail_state.dart';
+import 'package:ditonton/presentation/bloc/movies/search_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/entities/movie_detail.dart';
-import '../../domain/usecases/get_movie_detail.dart';
-import '../../domain/usecases/get_movie_recommendations.dart';
-import '../../domain/usecases/get_watchlist_status.dart';
-import '../../domain/usecases/remove_watchlist.dart';
-import '../../domain/usecases/save_watchlist.dart';
+import '../../../../domain/entities/movie_detail.dart';
+import '../../../domain/usecases/get_movie_detail.dart';
+import '../../../domain/usecases/get_movie_recommendations.dart';
+import '../../../domain/usecases/get_watchlist_status.dart';
+import '../../../domain/usecases/remove_watchlist.dart';
+import '../../../domain/usecases/save_watchlist.dart';
+import 'movie_detail_state.dart';
 
 class MovieDetailCubit extends Cubit<MovieDetailState> {
   final GetMovieDetail getMovieDetail;

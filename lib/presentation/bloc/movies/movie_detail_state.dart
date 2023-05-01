@@ -1,7 +1,7 @@
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/movie.dart';
+import '../../../domain/entities/movie.dart';
 
 abstract class MovieDetailState extends Equatable {
   const MovieDetailState();

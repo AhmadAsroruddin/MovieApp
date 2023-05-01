@@ -1,6 +1,5 @@
-import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
-import 'package:ditonton/presentation/bloc/movie_topRated_state.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_topRated_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieTopRatedCubit extends Cubit<MovieTopRatedState> {

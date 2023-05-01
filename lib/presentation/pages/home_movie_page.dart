@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/presentation/bloc/movie_list_state.dart';
-import 'package:ditonton/presentation/bloc/movie_popular_bloc.dart';
-import 'package:ditonton/presentation/bloc/movie_popular_state.dart';
-import 'package:ditonton/presentation/bloc/movie_topRatedMovies_bloc.dart';
-import 'package:ditonton/presentation/bloc/movie_topRated_state.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_list_state.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_popular_state.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_topRatedMovies_bloc.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_topRated_state.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_series_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
@@ -20,7 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../bloc/movie_list_bloc.dart';
+import '../bloc/movies/movie_list_bloc.dart';
 import 'watchlist_sereis_page.dart';
 
 class HomeMoviePage extends StatefulWidget {

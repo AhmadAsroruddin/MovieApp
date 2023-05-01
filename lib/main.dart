@@ -1,10 +1,17 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/bloc/movie_detail_bloc.dart';
-import 'package:ditonton/presentation/bloc/movie_list_bloc.dart';
-import 'package:ditonton/presentation/bloc/movie_popular_bloc.dart';
-import 'package:ditonton/presentation/bloc/movie_topRatedMovies_bloc.dart';
-import 'package:ditonton/presentation/bloc/movies_watchList_bloc.dart';
+import 'package:ditonton/domain/usecases/search_series.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_list_bloc.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_topRatedMovies_bloc.dart';
+import 'package:ditonton/presentation/bloc/movies/movies_watchList_bloc.dart';
+import 'package:ditonton/presentation/bloc/series/search_bloc.dart';
+import 'package:ditonton/presentation/bloc/series/series_top_rated_bloc.dart';
+import 'package:ditonton/presentation/bloc/series/series_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/series/series_list_bloc.dart';
+import 'package:ditonton/presentation/bloc/series/series_popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/series/series_watchList_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/now_playing_series_page.dart';
@@ -26,7 +33,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 
-import 'presentation/bloc/search_bloc.dart';
+import 'presentation/bloc/movies/search_bloc.dart';
 import 'presentation/pages/movie_detail_page.dart';
 import 'presentation/pages/now_playing_movie.dart';
 import 'presentation/pages/popular_movies_page.dart';
@@ -86,6 +93,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
         ),
+        //bloc movies
         BlocProvider(
           create: (_) => di.locator<SearchCubit>(),
         ),
@@ -103,6 +111,26 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<MoviesWatchListCubit>(),
+        ),
+
+        //bloc series
+        BlocProvider(
+          create: (_) => di.locator<SearchSeriesCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SeriesDetailCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SeriesListCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SeriesTopRatedCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SeriesPopularCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SeriesWatchListCubit>(),
         ),
       ],
       child: MaterialApp(

@@ -1,9 +1,8 @@
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
-import 'package:ditonton/presentation/bloc/movie_popular_state.dart';
+import 'package:ditonton/presentation/bloc/movies/movie_popular_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'movie_list_state.dart';
 
 class MoviesPopularCubit extends Cubit<MoviesPopularState> {
   GetPopularMovies getPopularMovies;

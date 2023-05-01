@@ -12,8 +12,15 @@ import 'package:ditonton/presentation/pages/watchlist_sereis_page.dart';
 import 'package:ditonton/presentation/provider/series_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import '../bloc/series/series_top_rated_bloc.dart';
+import '../bloc/series/series_list_bloc.dart';
+import '../bloc/series/series_list_state.dart';
+import '../bloc/series/series_popular_bloc.dart';
+import '../bloc/series/series_popular_state.dart';
+import '../bloc/series/series_top_rated_state.dart';
 import 'watchlist_movies_page.dart';
 
 class HomeSeriesPage extends StatefulWidget {
@@ -26,11 +33,12 @@ class _HomeSeriesPageState extends State<HomeSeriesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<SeriesListNotifier>(context, listen: false)
-          ..fetchNowPlayingSeries()
-          ..fetchPopularSeries()
-          ..fetchTopRatedSeries());
+
+    Future.microtask(() {
+      context.read<SeriesTopRatedCubit>().fetchTopRatedMovie();
+      context.read<SeriesListCubit>().fetchNowPlayingSeries();
+      context.read<SeriesPopularCubit>().fetchPopularSeries();
+    });
   }
 
   @override
@@ -96,19 +104,22 @@ class _HomeSeriesPageState extends State<HomeSeriesPage> {
             children: [
               _buildSubHeading(
                 title: 'Now Playing',
-                onTap: () =>
-                    Navigator.pushNamed(context, NowPlayingSeriesPage.ROUTE_NAME),
+                onTap: () => Navigator.pushNamed(
+                    context, NowPlayingSeriesPage.ROUTE_NAME),
               ),
-              Consumer<SeriesListNotifier>(builder: (context, data, child) {
-                final state = data.nowPlayingState;
-                if (state == RequestState.Loading) {
+              BlocBuilder<SeriesListCubit, SeriesListState>(
+                  builder: (context, state) {
+                print(state);
+                if (state is SeriesListLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.nowPlayingSeries);
+                } else if (state is SeriesListHasData) {
+                  return MovieList(state.result);
+                } else if (state is SeriesListError) {
+                  return Text(state.message);
                 } else {
-                  return Text('Failed');
+                  return Container();
                 }
               }),
               _buildSubHeading(
@@ -116,16 +127,18 @@ class _HomeSeriesPageState extends State<HomeSeriesPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, PopularSeriesPage.ROUTE_NAME),
               ),
-              Consumer<SeriesListNotifier>(builder: (context, data, child) {
-                final state = data.popularSeriesState;
-                if (state == RequestState.Loading) {
+              BlocBuilder<SeriesPopularCubit, SeriesPopularState>(
+                  builder: (context, state) {
+                if (state is SeriesPopularLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.popularSeries);
+                } else if (state is SeriesPopularHasData) {
+                  return MovieList(state.result);
+                } else if (state is SeriesPopularError) {
+                  return Text(state.message);
                 } else {
-                  return Text('Failed');
+                  return Container();
                 }
               }),
               _buildSubHeading(
@@ -133,16 +146,18 @@ class _HomeSeriesPageState extends State<HomeSeriesPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedSeriesPage.ROUTE_NAME),
               ),
-              Consumer<SeriesListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedSeriesState;
-                if (state == RequestState.Loading) {
+              BlocBuilder<SeriesTopRatedCubit, SeriesTopRatedState>(
+                  builder: (context, state) {
+                if (state is SeriesTopRatedLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.topRatedSeries);
+                } else if (state is SeriesTopRatedHasData) {
+                  return MovieList(state.result);
+                } else if (state is SeriesTopRatedError) {
+                  return Text(state.message);
                 } else {
-                  return Text('Failed');
+                  return Container();
                 }
               }),
             ],

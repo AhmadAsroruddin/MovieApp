@@ -1,20 +1,22 @@
+import 'package:ditonton/domain/entities/series.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
+import 'package:ditonton/domain/usecases/search_series.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../domain/entities/movie.dart';
+import '../../../domain/entities/movie.dart';
 
 part 'search_state.dart';
 
-class SearchCubit extends Cubit<SearchState> {
-  final SearchMovies _searchMovies;
+class SearchSeriesCubit extends Cubit<SearchSeriesState> {
+  final SearchSeries _searchSeries;
 
-  SearchCubit(this._searchMovies) : super(SearchEmpty("pencarian kosong"));
+  SearchSeriesCubit(this._searchSeries) : super(SearchEmpty("pencarian kosong"));
   void onQueryChanged(String query) async {
     emit(SearchLoading());
 
-    final result = await _searchMovies.execute(query);
+    final result = await _searchSeries.execute(query);
 
     result.fold((failure) {
       emit(
